@@ -57,7 +57,7 @@ public class CandidateController {
      * @date 2025/02/21
      **/
     @RequestMapping("/update")
-    public Object update(Candidate candidate) {
+    public Object update(@RequestBody Candidate candidate) {
         return candidateService.update(candidate);
     }
 
@@ -80,7 +80,7 @@ public class CandidateController {
      **/
     @RequestMapping("/pageList")
     public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-        @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        @RequestParam(required = false, defaultValue = "200") int pageSize) {
         return candidateService.pageList(offset, pageSize);
     }
 }

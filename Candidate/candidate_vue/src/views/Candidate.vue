@@ -78,6 +78,9 @@
                     :rules="formRules"
                     label-width="100px"
             >
+                <el-form-item label="ID" prop="id">
+                    <el-input v-model="formData.id" disabled />
+                </el-form-item>
                 <el-form-item label="姓名" prop="name">
                     <el-input v-model="formData.name" />
                 </el-form-item>
