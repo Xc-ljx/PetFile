@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xc.candidate.mapper.CandidateMapper">
+
+
+    <resultMap id="BaseResultMap" type="com.xc.candidate.model.Candidate" >
+        <result column="id" property="id"/>
+        <result column="name" property="name" />
+        <result column="age" property="age" />
+        <result column="id_number" property="idNumber" />
+        <result column="university" property="university" />
+        <result column="target_position" property="targetPosition" />
+        <result column="recommender" property="recommender" />
+        <result column="phone" property="phone" />
+        <result column="wechat" property="wechat" />
+        <result column="status" property="status" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        name,
+                age,
+                id_number,
+                university,
+                target_position,
+                recommender,
+                phone,
+                wechat,
+                status,
+                remark,
+                create_time
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.xc.candidate.model.Candidate">
+        INSERT INTO candidate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != name and '' != name">
+                name,
+            </if>
+            <if test="null != age and '' != age">
+                age,
+            </if>
+            <if test="null != idNumber and '' != idNumber">
+                id_number,
+            </if>
+            <if test="null != university and '' != university">
+                university,
+            </if>
+            <if test="null != targetPosition and '' != targetPosition">
+                target_position,
+            </if>
+            <if test="null != recommender and '' != recommender">
+                recommender,
+            </if>
+            <if test="null != phone and '' != phone">
+                phone,
+            </if>
+            <if test="null != wechat and '' != wechat">
+                wechat,
+            </if>
+            <if test="null != status">
+                status,
+            </if>
+            <if test="null != remark and '' != remark">
+                remark,
+            </if>
+            <if test="null != createTime">
+                create_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != name and '' != name">
+                #{name},
+            </if>
+            <if test="null != age and '' != age">
+                #{age},
+            </if>
+            <if test="null != idNumber and '' != idNumber">
+                #{idNumber},
+            </if>
+            <if test="null != university and '' != university">
+                #{university},
+            </if>
+            <if test="null != targetPosition and '' != targetPosition">
+                #{targetPosition},
+            </if>
+            <if test="null != recommender and '' != recommender">
+                #{recommender},
+            </if>
+            <if test="null != phone and '' != phone">
+                #{phone},
+            </if>
+            <if test="null != wechat and '' != wechat">
+                #{wechat},
+            </if>
+            <if test="null != status">
+                #{status},
+            </if>
+            <if test="null != remark and '' != remark">
+                #{remark},
+            </if>
+            <if test="null != createTime">
+                #{createTime}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM candidate
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.xc.candidate.model.Candidate">
+        UPDATE candidate
+        <set>
+            <if test="null != name and '' != name">name = #{name},</if>
+            <if test="null != age and '' != age">age = #{age},</if>
+            <if test="null != idNumber and '' != idNumber">id_number = #{idNumber},</if>
+            <if test="null != university and '' != university">university = #{university},</if>
+            <if test="null != targetPosition and '' != targetPosition">target_position = #{targetPosition},</if>
+            <if test="null != recommender and '' != recommender">recommender = #{recommender},</if>
+            <if test="null != phone and '' != phone">phone = #{phone},</if>
+            <if test="null != wechat and '' != wechat">wechat = #{wechat},</if>
+            <if test="null != status and '' != status">status = #{status},</if>
+            <if test="null != remark and '' != remark">remark = #{remark},</if>
+            <if test="null != createTime and '' != createTime">create_time = #{createTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM candidate
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM candidate
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM candidate
+    </select>
+
+</mapper>
